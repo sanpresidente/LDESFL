@@ -1,0 +1,112 @@
+{% extends "base2.html" %}
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Entidade</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <!-- <link rel="stylesheet" href="static/css/style2.css"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+<style type="text/css">
+  input[type="text"] { display:block; }
+</style>
+
+</head>
+<body>
+	<form class="form" method="POST" action="/entidade" style="width: 445px;">
+      <div class="tlaregistro" style="height: 455px;">
+          <div style="text-align: center;">
+          <!--  <a href="https://www.casadacriancaitaporanga.com.br/" target="_blank"><img class="imglogin" src="../static/img/logo.png" alt=""></a> -->
+            <h2 style="color: black;">Cadastro de Entidade</h2>
+          </div>
+
+          <div class="tlaregistro-grupo" style="text-align: left;">
+            <label>Nome</label>
+            <input type="text" name="nome_entidade" minlength="5"
+                   maxlength="50" placeholder="Digite o nome da Entidade" 
+                   style="width: 376px;" required="">
+           </div>
+
+          <div class="tlaregistro-grupo" style="text-align: left;">
+            <label>Cnpj</label>
+            <input type="text" name="cnpj" minlength="14"
+                   maxlength="14" placeholder="Digite o Cnpj" 
+                   style="width: 376px;" required="">
+                
+            <label>Rua</label>  
+            <input type="text" name="rua" minlength="1"
+                   maxlength="50" placeholder="Digite o Nome da rua - ex: Rua Rafael vita" 
+                   style="width: 376px;" required="">
+          </div>
+
+          <div>
+            <div class="tlaregistro-grupo" style="position: relative; float: left; text-align: left;">
+            <label class="tlaregistro-grupo">Número
+            <input type="text" name="numero" minlength="1" maxlength="10" style="width: 100px;"
+                   placeholder="digite o número" required=""> </label>
+            </div>
+            
+            <div class="tlaregistro-grupo" style="position: relative; float: left; text-align: left;">
+            <label class="tlaregistro-grupo">Bairro
+            <input type="text" name="bairro" minlength="5" maxlength="20" style="width: 257px; margin-left: 10px;" 
+            placeholder="Digite o Bairro" required=""> </label> 
+            </div>
+          </div>
+          
+          <div>
+              <div class="tlaregistro-grupo" style="position: relative; float: left; text-align: left;">
+                <label class="tlaregistro-grupo">Cep
+                <input type="text" name="cep" maxlength="8" 
+                       style="width: 100px;" placeholder="Digite o Cep" required=""> </label>
+              </div>
+
+            <div class="tlaregistro-grupo" style="position: relative; float: left; text-align: left;">
+              <label class="tlaregistro-grupo">Cidade
+              <input type="text" name="cidade" maxlength="20" style="width: 200px; margin-left: 10px;" 
+                     placeholder="Digite a Cidade" required=""> </label>
+            </div>
+
+            <div class="tlaregistro-grupo" style="position: relative; float: left; text-align: left;">
+              <label class="tlaregistro-grupo">Estado
+              <input type="text" name="estado" minlength="2" maxlength="2" style="width: 40px; margin-left: 10px;" 
+                     placeholder="" required=""> </label>
+            </div>
+         </div>
+
+        <div>
+            <div class="tlaregistro-grupo" style="position: relative; float: left; text-align: left;">
+              <label class="tlaregistro-grupo">Email
+              <input type="email" name="email" maxlength="40" style="width: 376px;" 
+                     placeholder="Digite o Email" required=""> </label>
+            </div>
+        </div>
+
+        <div>
+            <div class="tlaregistro-grupo" style="position: relative; float: left; text-align: left;">
+              <label class="tlaregistro-grupo">Telefone
+              <input type="text" name="telefone" maxlength="15" style="width: 376px;" 
+                     placeholder="Digite o Telefone - ex: 15 - 3565-3532" required=""> </label>
+            </div>
+        </div>
+
+          <div class="card-group btn" style="position: relative; float: left; text-align: left; margin-top: 10px; left: 40px;">
+              {% if current_user.is_authenticated %}
+              <button type="submit" style=" width: 100px"><b>Salvar</b></button>
+              <button type="reset" style=" width: 100px"><b>Limpar</b></button>
+              <button type="button" style=" width: 100px"><a href="{{ url_for('main.profile') }}" 
+                      style="text-decoration:none; color: black;"><b>Cancelar</b></a></button>
+              {% endif %}
+          </div>
+      </div>
+    </form>
+</body>
+</html> 
+{% endblock %}   

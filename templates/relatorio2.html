@@ -1,0 +1,185 @@
+{% block content %}
+
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Demonstrativo de Caixa</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+   <!--  <link rel="stylesheet" href="../static/css/style2.css"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+
+				<form >
+					<button class="no-print" type="button" style="width: 61px;" onclick='history.go(-1)'>Voltar</button>
+					<input class="no-print" type="button" value="Imprimir" onClick="window.print()"/>
+ 				</form> 
+
+<body style="background-color: transparent;">
+  
+	<form class="form" action="" method="POST" style="width: 900px;">
+		<!-- CABEÇALHO -->
+		<div style="">
+		<img class="imglogin" src="../static/img/logo.png" style="float: left;margin-left: 1px; margin-top: 10px;">
+			
+		</div>
+
+		<div style="margin-left: 375px;"><p>Lar da Criança Dr. Franz Weiss<br/>CNPJ: 03.838.120/0001-50
+		    <br/>Rua: Dr. Rafael Vita, nº 385 - Vila dos Padres - Cep 18.480-000<br/>Itaporanga/SP
+		    <br/>Email: abrigofranzweiss@gmail.com - Tel: (15) 3565-3532</p>
+		</div>
+
+		<div style="position: relative; margin-top: 10px;">
+			<hr style="width: 100%;">
+			<p style="text-align: center; margin-bottom: 1px; font-weight: bold;">
+			Demonstrativo de RECEITAS e DESPESAS, recebidas e pagas diretamente do CAIXA no MÊS de: {{ mes }}/{{ ano }}</p>
+		</div>
+
+		
+             <!--  pula uma linha -->
+            <p></p>
+
+       <!--  RECEITAS -->
+		<div style="width: 433px; float: left;">
+			<table border="1" style="border-collapse:collapse; table-layout: fixed; width: 100%;">
+			    <thead>
+				    <tr>
+					    <td style="text-align: center;">RECEITAS</td>
+				    </tr>
+			    </thead>  
+			</table>
+		</div>	
+
+		<div style="width: 433px; float: right;">
+			<table border="1" style="border-collapse:collapse; table-layout: fixed;width: 100%;">
+			    <thead>
+				    <tr>
+					    <td style="text-align: center;">DESPESAS</td>	
+				    </tr>
+			    </thead>  
+			</table>
+		</div>	
+
+
+		<div style="width: 433px; float: left; margin-top: 5px;">
+			<table border="1" style="border-collapse:collapse; table-layout: fixed;">
+				<thead>
+					<tr>
+						<td style="text-align: center; width: 80px;">DATA</td>
+						<td style="text-align: center; width: 258px;">DISCRIMINAÇÃO</td>
+						<td style="text-align: center; width: 89px;">Vr. em R$</td>
+					</tr>
+				</thead>
+
+					{% for dado in dados2 %}
+				    {% if ano == dado.data[0:4] and mes == dado.data[5:7] and recurso == dado.conta_devedora[0:5] %}
+
+				<tbody>
+					<tr>
+						<td style="text-align: center; width: 80px;">{{ dado.data }}</td>
+						<td style="text-indent: 5px; width: 258px;">{{ dado.historico }}</td>
+						<td style="text-align: center; width: 89px;">{{ dado.valor.replace('.', ',') }}</td>
+					</tr>
+				</tbody>
+
+					{% endif %}
+					{% endfor %}
+					{% set soma2 = "{:.2f}".format(soma2)  %}
+					{% set soma2 = soma2 | string %}
+
+			</table>		
+		</div>
+
+		<div style="width: 433px; float: right; margin-top: 5px;">
+			<table border="1" style="border-collapse:collapse; table-layout: fixed;">
+				<thead>
+					<tr>
+						<td style="text-align: center; width: 80px;">DATA</td>
+						<td style="text-align: center; width: 258px;">DISCRIMINAÇÃO</td>
+						<td style="text-align: center; width: 89px;">Vr. em R$</td>
+					</tr>
+				</thead>
+				
+				    {% for dado in dados %}
+				    {% if ano == dado.data[0:4] and mes == dado.data[5:7] and recurso == dado.conta_credora[0:5] %}
+
+				<tbody>
+					<tr>
+						<td style="text-align: center; width: 80px;">{{ dado.data }}</td>
+						<td style="text-indent: 5px; width: 263px;">{{ dado.cpl_historico }}</td>
+						<td style="text-align: center; width: 85px;">{{ dado.valor.replace('.', ',') }}</td>
+					</tr>
+				</tbody>
+
+					{% endif %}
+					{% endfor %}
+					{% set soma1 = "{:.2f}".format(soma1)  %}
+				    {% set soma1 = soma1 | string %}
+
+			</table>		
+		</div>
+
+					{% set soma1 = soma1 | float %}
+					{% set soma2 = soma2 | float %}
+					{% set saldo = soma2 - soma1 %}
+					{% set soma2 = "{:.2f}".format(soma2) %}
+					{% set soma1 = "{:.2f}".format(soma1) %}
+					{% set saldo = "{:.2f}".format(saldo) %}
+					{% set soma1 = soma1 | string%}
+					{% set soma2 = soma2 | string%}
+					{% set saldo = saldo | string%}
+
+
+		<div style="width: 433px; float: left; margin-top: 1px; clear: both;">
+			<table border="1" style="border-collapse:collapse; table-layout: fixed; background-color: #FAEBD7;">							
+					<tr>
+						<td style="text-align: center; width: 338px; font-weight: bold;">TOTAL das Receitas</td>
+						<td style="text-align: center; width: 89px; font-weight: bold;">R$ {{soma2.replace('.', ',')}}</td>
+					</tr>
+		    </table>
+		</div>
+
+
+		<div style="width: 433px; float: right; margin-top: 1px;">
+			<table border="1" style="border-collapse:collapse; table-layout: fixed; background-color: #FAEBD7;">							
+					<tr>
+						<td style="text-align: center; width: 338px; font-weight: bold;">TOTAL das Despesas</td>
+						<td style="text-align: center; width: 89px; font-weight: bold;">R$ {{soma1.replace('.', ',')}}</td>
+					</tr>
+		    </table>
+		</div>
+
+
+		<div style="width: 480px; float: left; padding-left: 340; margin-top: 50px;">
+			<table border="1" style="border-collapse:collapse; table-layout: fixed; background-color: #FAEBD7;">							
+					<tr>
+						<td style="text-indent: 5px; width: 355px; font-weight: bold;">Saldo Atual</td>
+						<td style="text-align: center; width: 110px; font-weight: bold;">R$ {{ saldo.replace('.', ',') }}</td>
+					</tr>
+		    </table>
+		</div>
+
+
+
+
+		<div style="width: 700px; padding-left: 100px;float: left; margin-top: 50px;">
+			<table border="0" style="border-collapse:collapse; width:100%">
+			  <thead style="vertical-align:bottom">
+			    <tr>
+			      <td style="text-align: left; font-weight: bold;">______________________________</td>
+			      <td style="text-align: right; font-weight: bold;">______________________________</td>
+			    </tr>
+			    <tr>
+			      <td style="text-indent: 67px; font-weight: bold;">PRESIDENTE</td>
+			      <td style="text-indent: 240px; font-weight: bold;">TESOUREIRO</td>
+			    </tr>
+			  </thead>
+			</table>
+		</div>
+	</form>
+</body>
+</html>
+
+{% endblock %}

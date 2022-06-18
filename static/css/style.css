@@ -1,0 +1,164 @@
+h1 {
+ /*   border: 2px #eee solid; */
+    color: brown;
+    text-align: center;
+/*    padding: 10px; */
+}
+
+section{
+     min-height: 90vh;
+}
+
+body{ 
+    
+    background-color: #267cfdf6;
+    color: rgb(0, 0, 0);
+    height: 100%;
+}
+
+a{
+    text-decoration: none;
+}
+
+.basenavbar {
+    align-items: stretch;
+    
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.navbar{
+    align-items: stretch;
+ /*   display: flex; */
+    position: relative;
+    z-index: 30;
+}
+
+.form{
+    width: 400px;
+    margin: auto;
+ /*   padding: 40px; */
+}
+.card{
+    box-shadow: 1px 1px 5px #ccc;
+    background-color: white;
+    padding: 25px;
+    border-radius: 5px;
+}
+
+.card-top{
+    text-align: center;
+}
+
+.card-group{
+    margin-bottom: 10px;
+}
+
+.card-group > label{
+    width: 100%;
+    color: rgb(75, 75, 75);
+    display: block;    
+}
+
+.card-group > input{
+    border-radius: 5px;
+    outline: 0;
+    width: 100%;
+    height: 25px;
+    padding: 5p;
+}
+
+.card-group > button{
+    background-image: linear-gradient(#243668, #89D4F3);
+    width: 100%;
+    border-radius: 15px;
+    padding: 5px;
+    color: black;
+    border: 0px;
+    outline: 0px;
+}
+
+.btnlogin > button{
+    width: 100%;
+    border-radius: 15px;
+    padding: 5px;
+    color: black;
+    border: 0px;
+    outline: 0px;
+}
+
+.btn button:hover{
+    background-image: linear-gradient(to right, #89D4F3, #38080d);
+}
+
+.btn2:hover, .btn2:focus, .btn2:active {
+      background-color: #FF7F50!important;
+      border: none;
+      color:white;
+     background-image: linear-gradient(#243668, #89D4F3) !important;
+      }
+
+.imglogin{
+    border-radius: 10px;
+    height: auto; 
+    width: auto; 
+    max-width: 300px; 
+    max-height: 300px;
+    box-shadow: 1px 1px 5px #ccc;
+}
+
+.imglogos{
+    border-radius: 5px;
+    height: auto; 
+    width: auto; 
+    max-width: 100px; 
+    max-height: 100px;
+    box-shadow: 1px 1px 5px #ccc;
+}
+
+
+.tlaregistro{
+    box-shadow: 1px 1px 5px #ccc;
+    background-color: white;
+    padding: 30px;
+    border-radius: 5px;
+}
+
+/* .tlaregistro-grupo{
+    margin-bottom: 10px;
+} */
+
+.tlaregistro-grupo > label{
+    width: 100%;
+    color: rgb(75, 75, 75);
+    display: block;
+}
+
+.tlaregistro-grupo > input{
+    border-radius: 5px;
+    outline: 0;
+    width: 100%;
+    height: 25px;
+    padding: 5p;
+}
+
+
+.container {
+    width: 60%;
+    margin: 0px 360px;
+    box-sizing: border-box;
+    border: 1px solid red;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 1rem;
+}
+
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}

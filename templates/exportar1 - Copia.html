@@ -1,0 +1,55 @@
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Consulta</title>
+    <link rel="stylesheet" href="">
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+<body>
+	<form class="form" action="" method="POST" style="width: 100%;">
+     <div> 
+                   <table id="exportar1" border="1" style="border-collapse:collapse; width:100%; margin-top: 15px;">
+                  
+                      {% for dado in dados %}
+                      {% if ano in dado.data[0:4] and mes in dado.data[5:7] %}
+                  <tbody>
+                      <tr>
+                          <td>LC1</td>
+                          <td>00160</td>
+                          <td>+++</td>
+                          <td>1</td>
+                          <td>{{ dado.data }}</td>
+                          <td>++++++++++</td>
+                          <td>00001</td>
+                          <td>++++++++++++++++++++++++++++++</td>
+                          <td>002</td>
+                          <td>{{ dado.conta_dev_acesso }}</td>
+                          <td>++++++++++++++</td>
+                          <td>00000</td>
+                          <td>{{ dado.conta_cred_acesso }}</td>
+                          <td>++++++++++++++</td>
+                          <td>00000</td>
+                          <td>{{ dado.valor }}</td>
+                          <td>{{ dado.historico + ' - ' + dado.cpl_historico}}
+                         </tr>
+                  </tbody>
+                      {% endif %}
+                      {% endfor %}
+                      
+            </table>
+      
+ 
+    </div>
+    
+    </form>
+</body>
+</html> 
+{% endblock %}   

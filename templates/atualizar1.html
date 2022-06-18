@@ -1,0 +1,123 @@
+{% extends "base2.html" %}
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Atualizar</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <!-- <link rel="stylesheet" href="static/css/style2.css"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+<body>
+  <form class="form" method="POST" action="" style="width: 445px;">
+      <div class="tlaregistro" style="height: 455px;">
+          <div style="text-align: center;">
+            <a href="https://www.casadacriancaitaporanga.com.br/" target="_blank">
+              <img class="imglogos" src="../static/img/logo.png" alt=""></a>
+            <h2 style="color: black;">Atualizar Registro de Pagamentos</h2>
+          </div>
+
+          <div class="tlaregistro-grupo" style="text-align: left;">
+              <label autofocus>Data</label>
+              <input type="date" name="data" value="{{dados.data}}" style="width: 150px;" required="">
+          </div>
+
+          <div class="tlaregistro-grupo" style="text-align: left;">
+            <label>Selecione o meio de pagamento</label>
+            <input type="text" list="conta_pagadora" name="conta_credora" value="{{dados.conta_credora}}" minlength="5"
+                   maxlength="30" placeholder="clique para selecionar" 
+                   style="width: 376px;" required="">
+              <datalist id="conta_pagadora">
+                <option value="Caixa">
+                <option value="BANCO DO BRASIL S/A - CC 15705">
+                <option value="BANCO DO BRASIL S/A - CC 15088">
+                <option value="BANCO DO BRASIL S/A - CC 13042">
+                <option value="BANCO DO BRASIL S/A - CC 13220">
+                <option value="BANCO DO BRASIL S/A - CC 40001">
+                <option value="BANCO DO BRASIL S/A - CC 17023">
+                <option value="BANCO DO BRASIL S/A - CC 19387"> 
+              </datalist>
+          </div>
+
+          <div class="tlaregistro-grupo" style="text-align: left;">
+            <label>Selecione a categoria do pagamento</label>
+            <input type="text" list="conta_recebedora" name="conta_devedora" value="{{dados.conta_devedora}}" minlength="5"
+                   maxlength="30" placeholder="Categoria - clique para selecionar" 
+                   style="width: 376px;" required="">
+                <datalist id="conta_recebedora">
+                  <option value="Salarios a pagar">
+                  <option value="Combustiveis e lubrificantes">
+                  <option value="Material de higiene e limpeza">
+                  <option value="Copa, cozinha e refeitorio">
+                  <option value="Outras despesas com consumo">
+                  <option value="Farmacia">
+                  <option value="Mercado">
+                  <option value="Vestuario">
+                  <option value="Servicos hospitalares"> 
+                </datalist>
+            
+            <label>Selecione a natureza do pagamento</label>  
+            <input type="text" list="natureza_despesa" name="nat_despesa" value="{{dados.nat_despesa}}" minlength="5"
+                   maxlength="30" placeholder="Natureza - clique para selecionar" 
+                   style="width: 376px;" required="">
+                <datalist id="natureza_despesa">
+                    <option value="Recursos Humanos">
+                    <option value="Imposto Patronal">
+                    <option value="Honorário de Profissional">
+                    <option value="Telefone e Internet">
+                    <option value="Agua e Esgoto">
+                    <option value="Energia Elétrica">
+                    <option value="Despesas com Site">
+                    <option value="Tarifas">
+                  </datalist>       
+          </div>
+
+          <div class="tlaregistro-grupo" style="text-align: left;">
+            <label>Descreva o que você esta pagando</label>
+            <input list="historico" name="historico" value="{{dados.historico}}" minlength="5"
+                   maxlength="30" style="width: 376px;" 
+                   placeholder="ex: Pagamento Salario Ref mes 01/2021" required="">
+                <datalist id="historico">
+                    <option value="Pagamento Salario Ref mes:">
+                    <option value="Combustiveis e lubrificantes:">
+                    <option value="Material de higiene e limpeza:">
+                    <option value="Copa, cozinha e refeitorio:">
+                    <option value="Outras despesas com consumo:">
+                    <option value="Farmacia:">
+                    <option value="Mercado:">
+                    <option value="Vestuario:">
+                    <option value="Servicos hospitalares:"> 
+                  </datalist>
+          
+            <label>Descreva quem você esta pagando</label>
+            <input name="cpl_historico" value="{{dados.cpl_historico}}" minlength="5"
+                   maxlength="30" style="width: 376px;" 
+                   placeholder="ex: MARIA APARECIDA DA SILVA" required="">  
+          </div>
+          
+          <div class="tlaregistro-grupo" style="text-align: left;">
+            <label>Valor em R$</label>
+            <input type="value" name="valor" value="{{dados.valor}}" style="width: 150px;" 
+                   placeholder="Digite o valor" required="">
+          </div>
+
+          <div class="card-group btn" style="padding: 10px;">
+              {% if current_user.is_authenticated %}
+              <button type="submit" style=" width: 100px"><b>Atualizar</b></button>
+              <button type="reset" style=" width: 100px"><b>Limpar</b></button>
+              <button type="button" value='Voltar' onclick='history.go(-1)' style=" width: 100px; color: black;">
+                <b>Cancelar</b></button>
+              {% endif %}
+          </div>
+      </div>
+    </form>
+</body>
+</html> 
+{% endblock %}   

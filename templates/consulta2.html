@@ -1,0 +1,81 @@
+
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Consulta Recebimentos</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <!-- <link rel="stylesheet" href="../static/css/style2.css"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+<body>
+	<form class="form" action="" method="POST" style="width: 100%;">
+      <div class="tlaregistro">
+          <div style="text-align: center;">
+            <a href="https://www.casadacriancaitaporanga.com.br/" target="_blank"><img class="imglogin" 
+               src="../static/img/logo.png" alt=""></a>
+            <h2 style="color: black;">Consulta de Lançamentos de Recebimentos</h2>
+          </div>
+             
+          <div >
+              <button type="button" style=" width: 100px">
+                   <a href="{{ url_for('main.sel_consulta2') }}" 
+                      style="text-decoration:none"><b>Voltar</b></a>
+              </button>
+          </div>
+
+             <table border="1" style="border-collapse:collapse; width:100%; margin-top: 15px;">
+                  <thead>
+                      <tr>
+                          <td>ID</td>
+                          <td style="text-indent: 5px;">DATA</td>
+                          <td style="text-indent: 5px;">CONTA RECEBEDORA</td>
+                      <!--    <td style="text-indent: 5px;">CONTA CREDORA</td> -->
+                          <td style="text-indent: 5px;">HISTÓRICO</td>
+                          <td style="text-align: center;">VALOR</td>
+                          <td style="text-align: center;">Excluir</td>
+                          <td style="text-align: center;">Editar</td>
+                       </tr>
+                  </thead>
+                      {% for dado in dados2 %}
+                      {% if ano in dado.data[0:4] and mes in dado.data[5:7] %}
+                  <tbody>
+                      <tr>
+                          <td>{{ dado.id }}</td>
+                          <td style="text-align: center;">{{ dado.data }}</td>
+                          <td style="text-indent: 5px;">{{ dado.conta_devedora }}</td>
+                    <!--      <td style="text-indent: 5px;">{{ dado.conta_credora }}</td> -->
+                          <td style="text-indent: 5px;">{{ dado.historico + ' - ' + dado.doc_deposito}}</td>
+                          <td style="text-align: right;">{{ dado.valor.replace('.', ',') }}</td>
+                          
+                          <td style=" text-align: center;"><a href="/excluir2/{{ dado.id }}" 
+                            style="text-decoration: none;">Remover</a></td>
+                          <td style=" text-align: center;"><a href="/atualizar2/{{ dado.id }}" 
+                            style="text-decoration: none;">Alterar</a></td>
+                      </tr>
+                  </tbody>
+                      {% endif %}
+                      {% endfor %}
+                      {% set soma2 = "{:.2f}".format(soma2)  %}
+                      {% set soma2 = soma2 | string %}
+            </table>
+
+            <table border="1" style="border-collapse:collapse; width: 100%;">             
+            <tr>
+              <td style=" width: 85%;text-align: right; font-weight: bold;">TOTAL</td>
+              <td style="text-indent: 5px; font-weight: bold;">R$ {{soma2.replace('.', ',')}}</td>
+            </tr>
+            </table>
+
+      </div>
+    </form>
+</body>
+</html> 
+{% endblock %}   

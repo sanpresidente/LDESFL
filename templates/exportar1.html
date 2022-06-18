@@ -1,0 +1,41 @@
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Consulta</title>
+    <link rel="stylesheet" href="">
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+<body>
+	<form class="form" action="" method="POST" style="width: 100%;">
+     <div> 
+                   <table id="exportar1" border="1" style="border-collapse:collapse; width:100%; margin-top: 15px;">
+                  
+                      {% for dado in lancamentos %}
+                      {% if ano in dado.data[0:4] and mes in dado.data[5:7] %}
+                  <tbody>
+                      <tr>
+ <td>LC1{{dado.num_lancamento}}&#160;&#160;&#160;1{{ dado.data.replace('-', '') }}&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;00001&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;002{{ dado.cod1_conta_devedora }}&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;00000{{ dado.cod1_conta_credora }}&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;00000{{ dado.valor }}{{ dado.cpl_historico }}</td>
+                          
+ 
+                         </tr>
+                  </tbody>
+                      {% endif %}
+                      {% endfor %}
+                      
+            </table>
+      
+ 
+    </div>
+    
+    </form>
+</body>
+</html> 
+{% endblock %}   

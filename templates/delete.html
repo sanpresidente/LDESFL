@@ -1,0 +1,38 @@
+{% extends "base2.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Delete</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/style2.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+<body>
+	<form class="form" method="POST" action="" style="width: 820px;">
+      <div class="tlaregistro">
+          <div style="text-align: center;">
+            <a href="https://www.casadacriancaitaporanga.com.br/" target="_blank"><img class="imglogin" src="../static/img/logo.png" alt=""></a>
+            <h2 style="color: black;">Confirme a Exclusão</h2>
+          </div>
+
+                    
+          <div class="card-group btn">
+              {% if current_user.is_authenticated %}
+              <button type="submit" value="YES" style=" width: 200px"><b>Excluir</b></button>
+              <button type="button" value='Voltar' onclick='history.go(-1)' style=" width: 200px"><b>Cancelar</b></a></button>
+              {% endif %}
+          </div>
+
+
+      </div>
+    </form>
+</body>
+</html> 
+{% endblock %}   

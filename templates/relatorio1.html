@@ -1,0 +1,266 @@
+{% block content %}
+
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Demonstrativo de Despesas</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+   <!--  <link rel="stylesheet" href="../static/css/style2.css"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+</head>
+
+		<form >
+		<button class="no-print" type="button" style="width: 61px;" onclick='history.go(-1)'>Voltar</button>
+		<input class="no-print" type="button" value="Imprimir" onClick="window.print()"/>
+		</form> 
+
+<body style="background-color: transparent;">
+
+	<form class="form" action="" method="POST" style="width: 820px;">
+		<!-- CABEÇALHO -->
+		<div style="">
+		<img class="imglogin" src="../static/img/logo.png" style="float: left;margin-left: 1px; margin-top: 10px;">
+		</div>
+
+		<div style="margin-left: 375px;"><p>Lar da Criança Dr. Franz Weiss<br/>CNPJ: 03.838.120/0001-50
+		    <br/>Rua: Dr. Rafael Vita, nº 385 - Vila dos Padres - Cep 18.480-000<br/>Itaporanga/SP
+		    <br/>Email: abrigofranzweiss@gmail.com - Tel: (15) 3565-3532</p>
+		</div>
+
+		<div style="position: relative; margin-top: 10px;">
+			<p style="text-align: center; margin-bottom: 1px; font-weight: bold;">DEMONSTRATIVO DE DESPESAS</p>
+		</div>
+
+		<table border="0" style="border-collapse:collapse; width:100%;">
+		  <thead style="vertical-align:bottom">
+		    <tr >
+		      <td style="text-align: center;">Demonstrativo de despesas pagas com o recurso
+		                 obtido através da {{ recurso }}</td>
+		    </tr>
+		    <tr >
+		      <td style="text-align: left; text-indent: 35px; font-weight: bold;">Exercício: {{ ano }}</td>
+		    </tr>
+		    <tr >
+		      <td style="text-align: left; text-indent: 35px; font-weight: bold;">Entidade Executora: Lar da Criança Dr. Franz Weiss</td>
+		    </tr>
+		    <tr >
+		      <td style="text-align: left; text-indent:35px; font-weight: bold;">Endereço: Rua Dr. Rafael Vita, nº 385 - Vila dos Padres - 
+		                 Itaporanga/SP - CEP: 18.480-000</td>
+		    </tr>
+		            {% for dado in convenio %}
+					{% if (ano in dado.ano_exercicio[0:4]) :%}
+		    <tr >
+		      <td style="text-align: left; text-indent:35px; font-weight: bold;">Orgão Concessor: {{ dado.orgao_concessor }}</td>
+		    </tr>
+		    <tr >
+		      <td style="text-align: left; text-indent:35px; font-weight: bold;">Nº do Contrato: {{ dado.num_contrato }} </td>
+		    </tr>
+		    <tr >
+		      <td style="text-align: left; text-indent:35px; font-weight: bold;">Data do recebimento do recurso: 
+		                {{ dado.data_rec_recurso }}</td>
+		    </tr>
+		    		{% endif %}
+					{% endfor %}
+		    <tr >
+		      <td style="text-align: left; text-indent:35px; font-weight: bold;">Mês de referência: {{ mes }}/{{ ano }}</td>
+		    </tr>
+		    
+		  </thead>
+		</table>
+             <!--  pula uma linha -->
+            <p></p>
+
+       <!--  RECEITAS -->
+			<table border="1" style="border-collapse:collapse; width:100%">
+			  <thead style="vertical-align:bottom">
+			    <tr>
+			      <td style="text-align: center;">FIXAÇÃO DA RECEITA CONFORME O CRONOGRAMA DE DESEMBOLSO</td>
+			    </tr>
+			</table>
+
+		<div style="position: relative; margin-top: 1px;">
+			<table border="1" style="border-collapse:collapse; width: 100%;">
+				<thead>
+					<tr>
+						<td style="text-align: center;">DATA</td>
+						<td style="text-align: center;">DESCRIÇÃO DAS RECEITAS</td>
+						<td style="text-align: center;">DOCUMENTO DE DEPÓSITO</td>
+						<td style="text-align: center;">VALOR DEPOSITADO</td>
+					</tr>
+				</thead>
+					{% for dado in dados2 %}
+					{% if ano == dado.data[0:4] and mes == dado.data[5:7] and dado.conta_devedora != 'Caixa' %}
+					<tbody>
+						<tr>
+							<td style="text-align: center;">{{ dado.data }}</td>
+							<td style="text-indent: 5px;">{{ dado.historico }}</td>
+							<td style="text-align: center;">{{ dado.doc_deposito }}</td>
+							<td style="text-align: center;">{{ dado.valor.replace('.', ',') }}</td>
+						</tr>
+					</tbody>
+					{% endif %}
+					{% endfor %}
+					{% set soma2 = "{:.2f}".format(soma2)  %}
+					{% set soma2 = soma2 | string%}
+			</table>
+		</div>
+
+			<table border="1" style="border-collapse:collapse; width: 100%;">							
+				<tr>
+					<td style=" width: 78%;text-align: center; font-weight: bold;">TOTAL</td>
+					<td style="text-align: center; font-weight: bold;">R$ {{soma2.replace('.', ',')}}</td>
+				</tr>
+		    </table>
+<p></p>
+	<!--  DESPESAS -->
+			<table border="1" style="border-collapse:collapse; width:100%">
+			  <thead style="vertical-align:bottom">
+			    <tr>
+			      <td style="text-align: center;">DEMONSTRATIVO DAS DESPESAS REALIZADAS</td>
+			    </tr>
+			</table>
+
+		<div style="position: relative; margin-top: 1px;">
+			<table border="1" style="border-collapse:collapse; width: 100%;">
+				<thead>
+					<tr>
+						<td style="text-align: center;">DATA</td>
+						<td style="text-align: center;">DESCRIÇÃO DA DESPESA</td>
+						<td style="text-align: center;">NAT. DA DESPESA</td>
+						<td style="text-align: center;">VALOR APLICADO</td>
+					</tr>
+				</thead>
+
+				    {% for dado in dados %}
+				    {% if ano == dado.data[0:4] and mes == dado.data[5:7] and dado.conta_credora != 'Caixa' %}
+					<tbody>
+						<tr>
+							<td style="text-align: center;">{{ dado.data }}</td>
+							<td style="text-indent: 5px;">{{ dado.cpl_historico }}</td>
+							<td style="text-align: center;">{{ dado.nat_despesa }}</td>
+							<td style="text-align: center;">{{ dado.valor.replace('.', ',') }}</td>
+						</tr>
+					</tbody>
+					{% endif %}
+					{% endfor %}
+					{% set soma1 = "{:.2f}".format(soma1)  %}
+				    {% set soma1 = soma1 | string %}
+			</table>
+		</div>	
+
+				<table border="1" style="border-collapse:collapse; width: 100%;">							
+					<tr>
+						<td style=" width: 77%;text-align: center; font-weight: bold;">TOTAL</td>
+						<td style="text-align: center; font-weight: bold;">R$ {{soma1.replace('.', ',')}}</td>
+					</tr>
+				</table>
+
+		<!--  RESUMO -->
+
+					{% set soma1 = soma1 | float %}
+					{% set soma2 = soma2 | float %}
+					{% set saldo = soma2 - soma1 %}
+					{% set soma2 = "{:.2f}".format(soma2) %}
+					{% set soma1 = "{:.2f}".format(soma1) %}
+					{% set saldo = "{:.2f}".format(saldo) %}
+					{% set soma1 = soma1 | string%}
+					{% set soma2 = soma2 | string%}
+					{% set saldo = saldo | string%}
+					
+
+		<div style="padding: 30px; margin-top: -15px;">
+			
+			<table border="0" style="border-collapse:collapse; width:100%">
+			  <thead style="vertical-align:bottom">
+			    <tr>
+			      <td style="width: 70%;text-align: left; font-weight: bold;">Nº de Documentos Relacionados: </td>
+			      <td style="text-align: left; font-weight: bold;">{{(tot1)}}</td>
+			    </tr>
+			  </thead>
+			</table>
+<p></p>
+			<table border="0" style="border-collapse:collapse; width:100%">
+			  <thead style="vertical-align:bottom">
+
+			    <tr>
+			      <td style="width: 70%; text-align: left; ">Recursos Recebidos no mês:</td>
+			      <td style="text-align: left;">R$ </td>
+			      <td style="text-align: left;">0,00</td>
+			    </tr>
+
+			    <tr>
+			      <td style="text-align: left; font-weight: bold;">Total de Recursos no mês:</td>
+			      <td style="text-align: left; font-weight: bold;">R$ </td>
+			      <td style="text-align: left; font-weight: bold;">{{soma2.replace('.', ',')}}</td>
+			    </tr>
+
+			    <tr>
+			      <td style="text-align: left; font-weight: bold;">Total de Despesas no Mês 
+			                (Pagos com Recursos do Convênio):</td>
+			      <td style="text-align: left; font-weight: bold;">R$ </td>
+			      <td style="text-align: left; font-weight: bold;">{{soma1.replace('.', ',')}}</td>
+			    </tr>
+			  </thead>
+			</table>
+<p></p>
+			<table border="0" style="border-collapse:collapse; width:100%">
+			  <thead style="vertical-align:bottom">
+			  	<tr>
+			      <td style="width: 70%; text-align: left; font-weight: bold;">Saldo para o próximo Mês 
+			                (Recursos do Convênio):</td>
+			      <td style="text-align: left; font-weight: bold;">R$ </td>
+			      <td style="text-align: left; font-weight: bold;">{{ saldo.replace('.', ',') }}</td>
+			    </tr>
+			  </thead>
+			</table>
+		</div>
+
+		<div style="padding: 30px; margin-top: -30px;">
+			<table border="0" style="border-collapse:collapse; width:100%">
+			  <thead style="vertical-align:bottom">
+			    <tr>
+			      <td style="text-align: justify; ">Declaramos na qualidade
+			          de responsáveis pelo convênio dos recursos da Entidade Lar Dr. Franz Weiss,
+			          que a documentação acima mencionada comprova a  aplicação dos recursos
+			          recebidos de acordo com os fins indicados no Plano de Trabalho,
+			          conforme o Desemboldo do período.</td>
+			    </tr>
+			  </thead>
+			</table>
+		</div>	
+
+		<div style="padding: 30px; margin-top: -50px;">
+			<table border="0" style="border-collapse:collapse; width:100%">
+			  <thead style="vertical-align:bottom">
+			    <tr>
+			      <td style="text-align: right; font-weight: bold;">Itaporanga, 
+			           {{ data_e_hora_em_texto }}.</td>
+			    </tr>
+			  </thead>
+			</table>
+		</div>
+
+		<div style="padding: 30px;">
+			<table border="0" style="border-collapse:collapse; width:100%">
+			  <thead style="vertical-align:bottom">
+			    <tr>
+			      <td style="text-align: left; font-weight: bold;">______________________________</td>
+			      <td style="text-align: right; font-weight: bold;">______________________________</td>
+			    </tr>
+			    <tr>
+			      <td style="text-indent: 67px; font-weight: bold;">PRESIDENTE</td>
+			      <td style="text-indent: 308px; font-weight: bold;">TESOUREIRO</td>
+			    </tr>
+			  </thead>
+			</table>
+		</div>
+
+	</form>	
+</body>
+</html>
+
+{% endblock %}

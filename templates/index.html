@@ -1,0 +1,18 @@
+<!-- templates/index.html -->
+
+{% extends "base2.html" %}
+
+{% block content %}
+<h1 style="color: #fff;">
+  Bem-vindo ao Sistema LDESFL
+</h1>
+{% if current_user.is_authenticated %}  
+<h2 style="color:#fff ;">Você já está logado, ir para <a href="{{ url_for('main.profile') }}" style="text-decoration:none; color: rgb(35, 1, 182);"><b>página principal</b></a></h2>
+
+{% else %}
+<h2 style="color: #fff";>
+  
+  Faça seu login
+</h2>
+{% endif %}
+{% endblock %}

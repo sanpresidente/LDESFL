@@ -1,0 +1,121 @@
+<!-- templates/principal.html -->
+
+{% extends "base2.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Principal</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/style2.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+<style type="text/css">
+  ul {
+margin: 0;
+padding: 0;
+list-style: none;
+width: 150px;
+}
+ul li {
+position: relative;
+}
+li ul {
+position: absolute;
+left: 149px;
+top: 0;
+display: none;
+}
+ul li a {
+   display: block;
+   text-decoration: none;
+   color: white;
+   background-color: #FF7F50!important;
+   padding: 5px;
+   border: 1px solid #ccc;
+   background-image: linear-gradient(#243668, #89D4F3) !important;
+   border-radius: 5px; }
+li:hover ul { display: block; }
+</style>
+
+</head>
+<body>
+  <h1 style="color: #fff; border:none;">
+  Bem-vindo, {{ name }}!
+</h1>
+    <form class="form" action="" style="width: 820px; padding: 10px;">
+    <div class="card" >
+          <div style="text-align: left; border-width: 1px; border-radius: 5px;
+            border-style: solid;
+            border-color: black; width: 200px; height: 350px;">
+
+            {% if current_user.is_authenticated %}          
+   <ul style="margin-top: 10px;">
+    <li class="btn2" style="margin-bottom: 10px; left: 23px;"> <a href="" style="height: 35px; ">Cadastros</a>
+      <ul>
+        <li style="margin-bottom: 3px; margin-left: 3px;"> <a href="{{ url_for('main.entidade') }}">Cadastre a Entidade</a></li>
+        <li style="margin-bottom: 3px; margin-left: 3px;"> <a href="{{ url_for('main.consulta3') }}">Consulte a Entidade</a></li>
+        <li style="margin-bottom: 3px; margin-left: 3px;"> <a href="{{ url_for('main.convenio') }}">Cadastre o Convenio</a></li>
+        <li style="margin-bottom: 3px; margin-left: 2px;"> <a href="{{ url_for('main.consulta4') }}">Consulte o Convenio</a></li>
+      </ul>
+    </li>
+</ul>
+            {% endif %}
+
+            {% if current_user.is_authenticated %}
+<ul>
+    <li style="margin-bottom: 10px; left: 23px;"> <a href="{{ url_for('main.pagamentos') }}" style="height: 35px; ">Pagamentos</a></li>
+</ul>
+            {% endif %}
+
+            {% if current_user.is_authenticated %}            
+<ul>
+    <li style="margin-bottom: 10px; left: 23px;"> <a href="{{ url_for('main.recebimentos') }}" style="height: 35px; ">Recebimentos</a></li>
+</ul>
+            {% endif %}
+            
+            {% if current_user.is_authenticated %}
+<ul>
+    <li style="margin-bottom: 10px; left: 23px;"> <a href="" style="height: 35px; ">Consultas</a>
+      <ul>
+        <li style="margin-bottom: 3px; margin-left: 3px;"> <a href="{{ url_for('main.sel_consulta1') }}">Pagamentos</a></li>
+        <li style="margin-bottom: 3px; margin-left: 3px;"> <a href="{{ url_for('main.sel_consulta2') }}">Recebimentos</a></li>
+       </ul>
+    </li>
+</ul>
+            {% endif %}
+            
+            {% if current_user.is_authenticated %}
+<ul>
+    <li style="margin-bottom: 10px; left: 23px;"> <a href="" style="height: 35px; ">Relatórios</a>
+      <ul>
+        <li style="margin-bottom: 3px; margin-left: 3px;"> <a href="{{ url_for('main.sel_relatorio1') }}">Subvenções</a></li>
+        <li style="margin-bottom: 3px; margin-left: 3px;"> <a href="{{ url_for('main.sel_relatorio2') }}">Caixa</a></li>
+       </ul>
+    </li>
+</ul>         
+            {% endif %}
+
+            {% if current_user.is_authenticated %}
+            <ul>
+            <li style="margin-bottom: 10px; left: 23px;"><a href="{{ url_for('auth.logout') }}" style="height: 35px; ">Sair</a></li>
+            {% endif %}
+            </ul>          
+ 
+          </div>
+         
+            <div style="margin-top: 40px;" >
+            <img style="max-width: 500px; float: right; margin-top: -250px;" src="../static/img/logo.png" >
+            </div>       
+
+    </div>
+
+  </form>
+</body>
+</html>
+{% endblock %}

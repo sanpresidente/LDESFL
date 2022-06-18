@@ -1,0 +1,60 @@
+<!-- templates/login.html -->
+
+{% extends "base2.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <!-- <link rel="stylesheet" href="static/css/style2.css"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+<body>
+	<div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <script>
+            alert('Por favor, verifique os seus dados de login e tente novamente.')
+        </script>
+          
+        {% endif %}
+        {% endwith %}
+           <form class="form" method="POST" action="/login" style="width: 440px; padding: 50px;">
+        		<div class="card">
+        		  <div class="card-top">
+                    <a href="https://www.casadacriancaitaporanga.com.br/" target="_blank"><img class="imglogin" src="../static/img/logo.png" alt=""></a>
+                    <h2 class="title" style="color: red;">Controle de Acesso</h2>
+                    <p>Digite suas credenciais</p>
+                  </div>
+
+                  <div class="card-group">
+                      <label style="text-align: left;">Email</label>
+                      <input type="email" name="email" placeholder="Digite seu email" autofocus="" required="">
+                  </div>
+
+                  <div class="card-group">
+                      <label style="text-align: left;">Senha</label>
+                      <input type="password" name="password" placeholder="Digite sua senha" required="">
+                  </div>
+
+                  <div class="card-group">
+                      <label><input type="checkbox"> Lembre-me</label>
+                  </div>
+
+                  <div class="btnlogin btn">
+                      <button type="submit" style="padding: 15px; border-radius: 5px; background-color: #89D4F3;"><b>Acessar</b></button>
+                  </div>
+
+        		</div>
+        	</form>
+  </div>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "base2.html" %}
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Convenios</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <!-- <link rel="stylesheet" href="static/css/style2.css"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+<body>
+	<form class="form" method="POST" action="/convenio" style="width: 445px;">
+      <div class="tlaregistro" style="height: 455px;">
+          <div style="text-align: center;">
+           <!-- <a href="https://www.casadacriancaitaporanga.com.br/" target="_blank"><img class="imglogin" src="../static/img/logo.png" alt=""></a> -->
+            <h2 style="color: black;">Cadastro de Convênios</h2>
+          </div>
+
+          <div class="tlaregistro-grupo" style="text-align: left;">
+            <label>Nome do Convênio</label>
+            <input type="text" name="nome_convenio" 
+                   maxlength="60" placeholder="Digite o nome do Convênio" 
+                   style="width: 376px;" required="">
+           </div>
+
+          <div class="tlaregistro-grupo" style="text-align: left;">
+            <label>Orgão Concessor</label>
+            <input type="text" name="orgao_concessor" 
+                   maxlength="60" placeholder="Digite o nome do orgão concessor" 
+                   style="width: 376px;" required="">
+                
+            <label>Numero do Contrato</label>  
+            <input type="text" name="num_contrato" 
+                   maxlength="15" placeholder="Digite o número do contrato" 
+                   style="width: 376px;" required="">
+          </div>
+
+          <div class="tlaregistro-grupo" style="text-align: left;">
+            <label>Data de recebimento do recurso</label>
+            <input type="date" name="data_rec_recurso" 
+                   style="width: 376px;" placeholder="Digite a data" >  
+          </div>
+          
+          <div class="tlaregistro-grupo" style="text-align: left;">
+            <label>Valor total do convênio</label>
+            <input type="text" name="vr_total_convenio" 
+                   style="width: 376px;" placeholder="Digite o valor do convênio" >
+          </div>
+
+          <div class="tlaregistro-grupo" style="text-align: left;">
+            <label>Ano do exercício</label>
+            <input type="text" name="ano_exercicio" minlength="4" maxlength="4" style="width: 376px;" 
+                   placeholder="Digite o ano do exercício do convênio" required="">
+          </div>
+
+          <div class="tlaregistro-grupo" style="text-align: left;">
+            <label>Saldo anterior</label>
+            <input type="text" name="saldo_anterior" style="width: 376px;" 
+                   placeholder="Digite o saldo anterior do convênio" required="">
+          </div>
+
+          <div class="card-group btn" style="padding: 10px;">
+              {% if current_user.is_authenticated %}
+              <button type="submit" style=" width: 100px"><b>Salvar</b></button>
+              <button type="reset" style=" width: 100px"><b>Limpar</b></button>
+              <button type="button" style=" width: 100px"><a href="{{ url_for('main.profile') }}" 
+                      style="text-decoration:none; color: black;"><b>Cancelar</b></a></button>
+              {% endif %}
+          </div>
+      </div>
+    </form>
+</body>
+</html> 
+{% endblock %}   
